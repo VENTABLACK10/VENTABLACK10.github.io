@@ -24,7 +24,7 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * Decoer: encoder와 유사하게 N=6인 6개의 층으로 구성되고 인코더 출력에 대한 multi-head attention sub layer를 추가한다. 또한, self-attention 이후 위치에 대한 접근을 막기 위해 masking을 사용하고 이는 i번째 예측 이전 정보만을 이용해 예측하도록 도와준다.
 
 #### 3.2 Attention
-* Attention Function은 Query, Key-Value 쌍을 받아서 Query와 각 Key 간의 유사도를 통해 계산된 가중치를 사용해 Value들의 가중 합을 출력한다.                   
+* Attention Function은 Query, Key-Value 쌍을 받아서 Query와 각 Key 간의 유사도를 통해 계산된 가중치를 사용해 Value들의 가중 합을 출력한다.                  
 ![photo 156](/assets/img/blog/img156.png)               
 <br>                                  
        
