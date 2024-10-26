@@ -95,9 +95,8 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * (C) = 모델 크기 증가 -> BLEU 점수는 향상됐지만, 훈련 비용도 함께 증
 * (D) = drop-out 변화 ->  drop-out 적용이 성능 개선에 도움
 * (E) = 위치 인코딩 변경 -> 기본 설정과 유사한 성능 
-* big = d_model=1024, d_ff=4096, h=16 설정 -> 성능 대폭 향상             
-
-![photo 164](/assets/img/blog/img164.png)                     
+* big = d_model=1024, d_ff=4096, h=16 설정 -> 성능 대폭 향상
+  ![photo 164](/assets/img/blog/img164.png)                     
 * 영문 구문 분석 작업 및 semi-supervised 학습에서도 기존 RNN 기반 모델들보다 뛰어난 성능 발휘했디.
 
 ### 7. Conclusion
