@@ -70,18 +70,18 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * Self-Attention은 더 해석 가능한 모델을 제공할 수 있고, 개별 attention head가 문장의 구문 및 의미 구조를 학습할 수 있다.
 
 ### 5. Training
-* 1. Training Data and Batching
+1. Training Data and Batching
   * WMT 2014 dataset을 사용해 모델 훈련
   * Byte-Pair Encoding(BFE)의 37,000개의 공유된 어휘 구성
   * English-French의 32,000개 word-piece 어휘 사용
   * 각 training batch에 25000개의 소스token과 25000개의 타겟token 포함
-* 2. Hardware and Schedule
+2. Hardware and Schedule
   *  8개의 NVIDIA P100 GPU 사용 단일 기기에서 훈련
   *  Base Model 12시간훈련 / Big Mode l35일 훈련
-* 3. Optimizer
+3. Optimizer
   *  Adam Optimizer 사용
   *  hyperparameter: β1=0.9, β2=0.98=0.98, ϵ=10^−9
-* 4. Regularization
+4. Regularization
   * Residual Dropout: 각 sub layer 출력에 dropout 적용, encoder 및 decoder embedding 합계에도 적용
   * Label Smoothing: 0.1로 설정, 불확실한 예측 학습을 통해 정확도와 BLEU Score 향상                      
 ![photo 162](/assets/img/blog/img162.png)                         
