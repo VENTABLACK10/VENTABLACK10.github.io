@@ -61,7 +61,7 @@ title:  "[Paper Reiview] Attention Is All You Need"
 ![photo 161](/assets/img/blog/img161.png)                    
 * positional encoding은 위의 식과 같이 삼각함수와 같은 주기함수를 통해 구현할 수 있다.
 * 삼각함수를 사용하는 이유는 모델이 상대적 위치 정보를 쉽게 학습할 수 있도록 하기 위해서다.
-* pos는 위치를 의미하고 i는 차원을 의미한다.
+* pos는 위치를 의미하고 i는 차원을 의미한다. 
 
 ### 4. Why Self-Attention
 
