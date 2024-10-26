@@ -42,9 +42,12 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * 본 논문에서는 h=8개의 head를 사용하고 각 head의 차원을 줄임으로써 single attention과 비슷한 계산 비용을 유지한다.
   
 #### 3.2.3 Applications of Attention in our Model
-* encoder-decoder attention: Query는 decoder에서 key, Value는 encoer에서 가져와 decoder가 input sequence의 모든 위치에 주목할 수 있게 한다.
-* encoder의 self attention: self-attention layer에서는 key, Value는, Query가 모두 동일한 위치에서 오고 encoder의 각 위치가 이전 layer의 모든 위치를 참조한다.
-* decoder의 self attention: decoder의 각 위치가 해당 위치까지의 모든 decoder 위치에 주목할 수 있게 한다. 또한, decoder에서 auto-regressive 특성을 유지하기 위해 모든 값을 -∞로 설정하여 masking하는 방식을 활용한다.           
+* encoder-decoder attention
+  * Query는 decoder에서 key, Value는 encoer에서 가져와 decoder가 input sequence의 모든 위치에 주목할 수 있게 한다.
+* encoder의 self attention
+  * self-attention layer에서는 key, Value는, Query가 모두 동일한 위치에서 오고 encoder의 각 위치가 이전 layer의 모든 위치를 참조한다.
+* decoder의 self attention
+  * decoder의 각 위치가 해당 위치까지의 모든 decoder 위치에 주목할 수 있게 한다. 또한, decoder에서 auto-regressive 특성을 유지하기 위해 모든 값을 -∞로 설정하여 masking하는 방식을 활용한다.           
 <br>                  
 
 #### 3.3 Position-wise Feed-Forward Networks              
