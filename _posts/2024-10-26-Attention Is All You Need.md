@@ -14,16 +14,20 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * 본 논문의 Transformer model은 병렬 계산 수를 상수로 줄이고 멀리 떨어진 위 간의 의존성 학습을 개선했다.
 * 또한, Transformer model은 RNN or CNN을 사용하지 않고 self-attention만으로 입력 및 출력의 표현을 계산하는 최초의 모델이다.
 
-### 3. ModelArchitecture\
+### 3. ModelArchitecture
 * 본 논문의 Transformer model은 encoder, decoder 모두에서 stacked self-attention과 point-wise FC Layer를 사용한다.         
-![photo 155](/assets/img/blog/img155.png)             
+![photo 155](/assets/img/blog/img155.png)                            
+<br>        
+
 #### 3.1 Encoder and Decoder Stacks
 * Encoder: N=6인 6개의 동일한 layer로 구성되고 각 층은 multi-head self-attention과 위치별 feed-forward network라는 두 개의 sub layer를 포함한다. 또한, Residual Connection과 Layer Normalization을 통해 d_model의 차원이 512인 출력을 생성한다.
 * Decoer: encoder와 유사하게 N=6인 6개의 층으로 구성되고 인코더 출력에 대한 multi-head attention sub layer를 추가한다. 또한, self-attention 이후 위치에 대한 접근을 막기 위해 masking을 사용하고 이는 i번째 예측 이전 정보만을 이용해 예측하도록 도와준다.
 
 #### 3.2 Attention
 * Attention Function은 Query, Key-Value 쌍을 받아서 Query와 각 Key 간의 유사도를 통해 계산된 가중치를 사용해 Value들의 가중 합을 출력한다.                   
-![photo 156](/assets/img/blog/img156.png)                
+![photo 156](/assets/img/blog/img156.png)               
+<br>                                  
+       
 #### 3.2.1 Scaled Dot-Product Attention             
 ![photo 157](/assets/img/blog/img157.png)               
 * Input: d_k 차원의 Query, Key / d_v 차원의 Value
@@ -40,13 +44,17 @@ title:  "[Paper Reiview] Attention Is All You Need"
 #### 3.2.3 Applications of Attention in our Model
 * encoder-decoder attention: Query는 decoder에서 key, Value는 encoer에서 가져와 decoder가 input sequence의 모든 위치에 주목할 수 있게 한다.
 * encoder의 self attention: self-attention layer에서는 key, Value는, Query가 모두 동일한 위치에서 오고 encoder의 각 위치가 이전 layer의 모든 위치를 참조한다.
-* decoder의 self attention: decoder의 각 위치가 해당 위치까지의 모든 decoder 위치에 주목할 수 있게 한다. 또한, decoder에서 auto-regressive 특성을 유지하기 위해 모든 값을 -∞로 설정하여 masking하는 방식을 활용한다.
+* decoder의 self attention: decoder의 각 위치가 해당 위치까지의 모든 decoder 위치에 주목할 수 있게 한다. 또한, decoder에서 auto-regressive 특성을 유지하기 위해 모든 값을 -∞로 설정하여 masking하는 방식을 활용한다.           
+<br>                  
+
 #### 3.3 Position-wise Feed-Forward Networks              
 ![photo 159](/assets/img/blog/img159.png)                                   
 * encoder와 decoder의 각 층에는 위치별로 동일하게 적용되는 FC Feed Forward Network(FFN)가 포함되어 있다.
 * FFN은 2개의 선형 변환과 그 사이에 ReLU 활성화 함수를 포함한다.
 * 선형 변환은 위치마다 동일하지만, 각 층마다 서로 다른 파라미터를 사용한다.
-* 본 논문에서는 입력과 출력의 차원은 d_model=512 사용했고 내부 layer의 차원은 d_ff = 2048로 사용했다.
+* 본 논문에서는 입력과 출력의 차원은 d_model=512 사용했고 내부 layer의 차원은 d_ff = 2048로 사용했다.             
+<br>                 
+
 #### 3.4 Embeddings and Softmax
 * Transformer model은 입력과 출력 token을 d_model 차원의 벡터로 변환하기 위해 학습된 embedding을 사용한다.
 * 또한, decoder의 출력은 선형변환과 softmax 함수를 통해 다음 token의 확률로 변환한다.
