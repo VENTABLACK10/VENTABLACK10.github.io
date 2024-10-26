@@ -29,14 +29,14 @@ title:  "[Paper Reiview] Attention Is All You Need"
 <br>                                  
        
 #### 3.2.1 Scaled Dot-Product Attention             
-![photo 157](/assets/img/blog/img157.png)               
+  ![photo 157](/assets/img/blog/img157.png)               
 * Input: d_k 차원의 Query, Key / d_v 차원의 Value
 * Attention = Query와 Key의 전치 행렬 값과의 곱 -> Scaling을 위해 √dk로 나누기 -> Softmax 함수 적용 -> V와 행렬 곱
 * Scaled Dot-Product Attention은 /√dk로 나누는 scaling을 통해 최적화된 행렬 곱세믈 사용할 수 있고 이는 공간 효율적이며 빠르다.
 * 또한, d_k값이 큰 경우, softmax 함수의 기울기 소실 문제를 해결해준다.
 
 #### 3.2.2 Multi-Head Attention          
-![photo 158](/assets/img/blog/img158.png)                
+  ![photo 158](/assets/img/blog/img158.png)                
 * Multi-Head Attention은 Query, Key, Value을 각각 d_k, d_k, d_v 차원으로 선형 변환한 후, 이를 h번 병렬로 attention 함수를 수행항여 최종 값을 생성한다.
 * 이를 통해 서로 다른 위치에서 다양한 정보를 통시에 처리할 수 있게 되었다.
 * 본 논문에서는 h=8개의 head를 사용하고 각 head의 차원을 줄임으로써 single attention과 비슷한 계산 비용을 유지한다.
@@ -48,7 +48,7 @@ title:  "[Paper Reiview] Attention Is All You Need"
 <br>                  
 
 #### 3.3 Position-wise Feed-Forward Networks              
-![photo 159](/assets/img/blog/img159.png)                                   
+  ![photo 159](/assets/img/blog/img159.png)                                   
 * encoder와 decoder의 각 층에는 위치별로 동일하게 적용되는 FC Feed Forward Network(FFN)가 포함되어 있다.
 * FFN은 2개의 선형 변환과 그 사이에 ReLU 활성화 함수를 포함한다.
 * 선형 변환은 위치마다 동일하지만, 각 층마다 서로 다른 파라미터를 사용한다.
