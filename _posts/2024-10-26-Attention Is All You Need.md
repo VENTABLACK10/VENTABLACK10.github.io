@@ -1,4 +1,4 @@
----
+![image](https://github.com/user-attachments/assets/efcbc9c7-68f7-4c83-a2ed-73b0e0015f8b)![image](https://github.com/user-attachments/assets/d74c82b2-3635-4d3f-a87e-8d178950b122)---
 layout: single
 title:  "[Paper Reiview] Attention Is All You Need"
 ---
@@ -64,12 +64,43 @@ title:  "[Paper Reiview] Attention Is All You Need"
 * pos는 위치를 의미하고 i는 차원을 의미한다. 
 
 ### 4. Why Self-Attention
-
+![photo 160](/assets/img/blog/img160.png)          
+* Self-Attention은 일정한 수의 순차적 연산으로 모든 위치를 연결할 수 있어 병렬화가 용이하고 sequence의 길이가 expression 차원보다 짧을 때 계산 효율이 높다.
+* 반면, recurrent layer는 O(n)의 순차적 연산이 필요해 긴 sequence에서 비효율적이고 convolutuional layer는 모든 위치 간의 직접 연결을 위해 여러 layer가 필요하고 계산 비용이 크다.
+* Self-Attention은 더 해석 가능한 모델을 제공할 수 있고, 개별 attention head가 문장의 구문 및 의미 구조를 학습할 수 있다.
 
 ### 5. Training
-
+* 1. Training Data and Batching
+  * WMT 2014 dataset을 사용해 모델 훈련
+  * Byte-Pair Encoding(BFE)의 37,000개의 공유된 어휘 구성
+  * English-French의 32,000개 word-piece 어휘 사용
+  * 각 training batch에 25000개의 소스token과 25000개의 타겟token 포함
+* 2. Hardware and Schedule
+  *  8개의 NVIDIA P100 GPU 사용 단일 기기에서 훈련
+  *  Base Model 12시간훈련 / Big Mode l35일 훈련
+* 3. Optimizer
+  *  Adam Optimizer 사용
+  *  hyperparameter: β1=0.9, β2=0.98=0.98, ϵ=10^−9
+* 4. Regularization
+  * Residual Dropout: 각 sub layer 출력에 dropout 적용, encoder 및 decoder embedding 합계에도 적용
+  * Label Smoothing: 0.1로 설정, 불확실한 예측 학습을 통해 정확도와 BLEU Score 향상                      
+![photo 162](/assets/img/blog/img162.png)                         
+* 해당 table을 통해 Transformer model이 다른 model에 비해 BLEU Score가 높고 계산 비용이 적은 것을 알 수 있다.
 
 ### 6. Results
+* 다음은 Transformer의 다양한 구성 요소의 중요성을 평가하기 위해 모델을 여러 방식으로 변형하여 성능 변화를 측정했다.          
+![photo 163](/assets/img/blog/img163.png)            
+* (A) = attention head 수 및 차원 변화 -> 단일 head에서만 성능 저하 발생 및 8개의 head에서 최적 성능
+* (B) = attention key 크기 감소 -> d_k 값이 클수 모델 성능에 긍정적 영향을 미침
+* (C) = 모델 크기 증가 -> BLEU 점수는 향상됐지만, 훈련 비용도 함께 증
+* (D) = drop-out 변화 ->  drop-out 적용이 성능 개선에 도움
+* (E) = 위치 인코딩 변경 -> 기본 설정과 유사한 성능 
+* big = d_model=1024, d_ff=4096, h=16 설정 -> 성능 대폭 향상             
 
+![photo 164](/assets/img/blog/img164.png)                     
+* 영문 구문 분석 작업 및 semi-supervised 학습에서도 기존 RNN 기반 모델들보다 뛰어난 성능 발휘했디.
 
 ### 7. Conclusion
+* 해당 논문은 Transformer Model이 attention 매커니즘만으로 구성된 최초의 sequence 변환 Model임을 보인다.
+* 본 논문의 Transformer Model은 기존의 encoder-decoder 구조에서 사용되던 RNN Layer를 multi-head self attention으로 대체했다.
+* 또한, 기계 번역 작업에서 RNN, CNN 기반 모델보다 빠른학습 및 높은 성능을 나타냈다.
