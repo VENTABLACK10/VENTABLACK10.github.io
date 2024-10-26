@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/efcbc9c7-68f7-4c83-a2ed-73b0e0015f8b)![image](https://github.com/user-attachments/assets/d74c82b2-3635-4d3f-a87e-8d178950b122)---
+---
 layout: single
 title:  "[Paper Reiview] Attention Is All You Need"
 ---
