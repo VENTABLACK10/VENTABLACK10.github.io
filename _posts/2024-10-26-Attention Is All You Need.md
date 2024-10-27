@@ -36,7 +36,7 @@ title:  "[Paper Reiview] Attention Is All You Need"
   ![photo 157](/assets/img/blog/img157.png)               
 * Input: d_k 차원의 Query, Key / d_v 차원의 Value
 * Attention = Query와 Key의 전치 행렬 값과의 곱 -> Scaling을 위해 √dk로 나누기 -> Softmax 함수 적용 -> V와 행렬 곱
-* Scaled Dot-Product Attention은 /√dk로 나누는 scaling을 통해 최적화된 행렬 곱세믈 사용할 수 있고 이는 공간 효율적이며 빠르다.
+* Scaled Dot-Product Attention은 /√dk로 나누는 scaling을 통해 최적화된 행렬 곱셈을 사용할 수 있고 이는 공간 효율적이며 빠르다.
 * 또한, d_k값이 큰 경우, softmax 함수의 기울기 소실 문제를 해결해준다.
 
 #### 4.2.2 Multi-Head Attention          
