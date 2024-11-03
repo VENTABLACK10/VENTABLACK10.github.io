@@ -109,8 +109,8 @@ title:  "[Paper Reiview] An Image Is Worth 16 X 16 Words: Transformers For Image
   * Specialized 작업에서는 BiT-R152x4와 비슷한 성능을 보인다.
 
 #### 4.3 PRE-TRAINING DATA REQUIREMENTS
-* Vision Transformer(ViT)의 성능이 데이터셋 크기에 따라 어떻게 변하는지 평가하기 위해 두 가지 실험 수행            
-  ![photo 170](/assets/img/blog/img170.png)   
+* Vision Transformer(ViT)의 성능이 데이터셋 크기에 따라 어떻게 변하는지 평가하기 위해 두 가지 실험 수행               
+  ![photo 170](/assets/img/blog/img170.png)     
 * 첫 번째 실험: 데이터셋 크기 증가(ImageNet → ImageNet-21k → JFT-300M)로 사전 학습 후 ImageNet으로 fine-tunning
   * 작은 데이터셋에서는 ViT-Large가 ViT-Base보다 성능이 떨어졌으나, 큰 데이터셋(JFT-300M)에서는 큰 모델이 완전한 성능을 발휘
   * BiT CNN은 작은 데이터셋에서 ViT보다 우수했으나, 큰 데이터셋에서는 ViT가 더 나은 성능 발휘
@@ -121,9 +121,9 @@ title:  "[Paper Reiview] An Image Is Worth 16 X 16 Words: Transformers For Image
 * 작은 데이터셋에서는 CNN의 유도 편향이 유리하지만, 큰 데이터셋에서는 ViT가 직접 패턴을 학습하여 더 좋은 성능을 보인다.
 * ViT의 few-shot 전이 성능이 유망하며, 향후 연구로 추가 분석이 기대됨을 언급했다.
 #### 4.4 SCALING STUDY
-  * JFT-300M에서 다양한 모델의 전이 성능을 평가하여 계산 비용 대비 성능을 비교한다.
-  * Model set: 7 ResNet, 6 ViT, 5 Hybrid
-  ![photo 171](/assets/img/blog/img171.png)
+  * JFT-300M에서 다양한 모델의 전이 성능을 평가하여 계산 비용 대비 성능을 비교한다.   
+  * Model set: 7 ResNet, 6 ViT, 5 Hybrid              
+  ![photo 171](/assets/img/blog/img171.png)         
   * ViT는 ResNet보다 계산 효율성이 높다.
   * 하이브리드 모델은 작은 계산 비용에서는 ViT보다 성능이 우수하지만, 모델이 커질수록 차이가 사라진다.
   * ViT는 실험 범위 내에서 성능 포화가 나타나지 않아 더 큰 확장이 가능함을 시사한다.
@@ -134,14 +134,14 @@ title:  "[Paper Reiview] An Image Is Worth 16 X 16 Words: Transformers For Image
 * Self-attention을 통해 ViT는 이미지 전반에 걸쳐 정보를 통합할 수 있다.
 * 일부 attetnion head는 최하위 layer에서도 전역적인 정보를 통합하고, 다른 head는 국소화횐 정보를 유지한다.
 * hybrid model에서는 국소화된 attention이 덜 두드러지고 네트워크 깊이에 따라 attention distance가 증가한다.
-* 전체적으로 model은 분류에 의미적으로 중요한 이미지 영역에 주의를 기울이고 있음을 확인했다.
-![photo 172](/assets/img/blog/img172.png)
+* 전체적으로 model은 분류에 의미적으로 중요한 이미지 영역에 주의를 기울이고 있음을 확인했다.                
+![photo 172](/assets/img/blog/img172.png)       
 
 #### 4.6 SELF-SUPERVISION
 * BERT에서 사용된 masked language modeling task를 모방하여 masked patch prediction을 통한 자가 지도 학습을 예비적으로 탐구했다.
 * 자가 지도 학습을 통해, ViT-B/16 소형 모델이 ImageNet에서 79.9%의 정확도를 달성했다.
-* 이는 무작위 초기화에서 학습한 경우에 비해 2% 유의미한 개선이지만, 지도 학습 사전 학습에 비해서는 아직 4% 뒤쳐진 성능이다.
-![photo 172](/assets/img/blog/img173.png)
+* 이는 무작위 초기화에서 학습한 경우에 비해 2% 유의미한 개선이지만, 지도 학습 사전 학습에 비해서는 아직 4% 뒤쳐진 성능이다.          
+![photo 172](/assets/img/blog/img173.png)            
 * 왼쪽: ViT-L/32 모델의 초기 RGB 값에 대한 linear embedding filter
 * 중앙: ViT-L/32 모델의 positional embedding 유사도, 코사인 유사도로 표시된 각 패치 간 위치 유사성
 * 오른쪽: 각 layer에서 attended area 크기와 네트워크 깊이 간 관계, 각 점은 특정 layer와 head의 평균 attention distance를 의미한다.
