@@ -69,7 +69,7 @@ title:  "[Paper Reiview] An Image Is Worth 16 X 16 Words: Transformers For Image
 * self-supervision을 이용한 작은 실험을 수행한 결과, self-supervision을 적용한 ViT가 미래에 대한 가능성을 보여준다
 
 #### 4.1 SETUP          
-![photo 167](/assets/img/blog/img167.png)              
+  ![photo 167](/assets/img/blog/img167.png)              
 1. Datasets               
   * ImageNet: 1,000개의 클래스, 130만 개의 이미지
   * ImageNet-21k: 21,000개의 클래스, 1,400만 개의 이미지
