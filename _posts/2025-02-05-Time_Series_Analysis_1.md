@@ -35,4 +35,12 @@ title:  "Time Series Analysis (1)"
   =>  따라서 시계열 예측을 위한 모델링 시, 시계열의 순서를 변경 및 데이터 shuffle X
 2. 시계열은 다른 특징들을 활용하지 않고 시계열만 활용해서 예측할 수 있다. 발생 or 기록한 시점과 그 시점에 관측된 값만 있는 간단한 데이터 집합이 주어지는 경우가 일반적이다.
 
+## 2. Random Walk
+### 2.1 Random Walk Process
+- Random Walk(확률보행): 무작위로 상승 or 하락이 발생하는 확률이 동일한 프로세스      
+  => y_t = C + y_t-1 + ε_t
+- Random Walk Process(확률 보행 프로세스)
+1. 정상성(stationary) 확인, 만약 비정상적이라면 차분(differencing)과 같은 변환 적용 필요
+2. 자기상관함수(ACF) 도식화 -> 확률 보행 모델 근사화
+
      
