@@ -38,7 +38,10 @@ title:  "Time Series Analysis (1)"
 ## 2. Random Walk
 ### 2.1 Random Walk Process
 - Random Walk(확률보행): 무작위로 상승 or 하락이 발생하는 확률이 동일한 프로세스      
-  => y_t = C + y_t-1 + ε_t
+- $y_t = C + y_{t-1} + \varepsilon_t$ (y_t: 현재 값, y_t-1: 이전 시간 단계 값, C: 상수, ε_t: 백색소음)
+  * If, C = 0 => drift가 있는 확률 보행
+- 확률보행 프로세스를 0으로 초기화 + 상수 C를 0으로 설정하면, t시점의 값은 t시점까지의 백색소음의 합과 같다.
+  y_t = sigma
 - Random Walk Process(확률 보행 프로세스)
 1. 정상성(stationary) 확인, 만약 비정상적이라면 차분(differencing)과 같은 변환 적용 필요
 2. 자기상관함수(ACF) 도식화 -> 확률 보행 모델 근사화
