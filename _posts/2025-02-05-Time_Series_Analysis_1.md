@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Time Series Analysis (1)"
+title:  "Time Series Analysis (1): Basic"
 ---
 
 ## 1. Understanding Time Series Forecasting
