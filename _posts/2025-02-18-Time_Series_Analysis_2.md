@@ -12,8 +12,8 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
    - q가 클수록 더 많은 과거 오차 항이 현잿값에 영향을 미친다. (적절한 q 설정이 중요)
  - Moving Average Process에서 현잿값은 수열의 평균, 현재 오차 항, 과거 오차 항으로부터 선형적으로 도출한다.
  - 수식: $y_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q} $
- - $\mu: 수열의 평균, \epsilon_t: 현재 오차 항, \epsilon_{t-q}: 과거 오차 항$
- - $\theta_q: 현잿값에 과거 오차가 미치는 영향의 크기$
+ - $\mu:$ 수열의 평균, $\epsilon_t:$ 현재 오차 항, $\epsilon_{t-q}:$ 과거 오차 항
+ - $\theta_q:$ 현잿값에 과거 오차가 미치는 영향의 크기
 
 - Moving Average Process에서 q(차수) 식별 단계
   1. 데이터 수집
@@ -67,11 +67,11 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 ### 4.1 Define a AutoRegressive(AR) Process
 - AutoRegressive Model
   - 예측값이 이전 값에만 선형적으로 의존한다고 가정, 즉 변수가 자기 자신에게 회귀함을 의미
-  - AR(p) Process로 표기, p는 차수를 의미
+  - AR(p) Process로 표기, p는 차수를 의미 (적절한 p 설정이 중요)
   - 수식: $y_t = C + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t$
-  - $C: 상수, \epsilon_t: 현재 오차 항, y_{t-p}: 과거 값$
-  - $\phi_p: 과거 값이 현재 값에 미치는 영향의 크기$
-  - if C != 0, 표류가 있는 확률 보행 
+  - $C$: 상수, $\epsilon_t$: 현재 오차 항, $y_{t-p}$: 과거 값
+  - $\phi_p$: 과거 값이 현재 값에 미치는 영향의 크기
+  - if $C != 0$, 표류가 있는 확률 보행 
 
 - AutoRegressive Process에서 P 식별 단계
   1. 데이터 수집
