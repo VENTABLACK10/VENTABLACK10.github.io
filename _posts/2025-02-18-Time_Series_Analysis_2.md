@@ -66,3 +66,4 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 
 
 
+참고문헌: TimeSeries Forecasting In Python
