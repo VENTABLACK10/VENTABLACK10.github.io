@@ -96,3 +96,7 @@ title:  "Time Series Analysis (1): Basic"
 - 기타
   * drift method: 마지막으로 측정된 값으로 예측 방법 수정 -> 시간의 흐름에 따른 값의 증가 or 감소 허용 (기울기 활용)
   * $forecast = drift * timestamp + y_i$ ($drift = $\frac{\Delta y}{\Delta x}$)
+<br>           
+
+
+참고문헌: TimeSeries Forecasting In Python
