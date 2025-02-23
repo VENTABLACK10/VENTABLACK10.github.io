@@ -95,7 +95,7 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 - ADF 통계량의 절댓값 크기가 작고 p-value가 높기 때문에 귀무가설 채택으로 현재 해당 데이터는 비정상성
 
 #### 4.2.2 변환을 통한 정상성 만족시키기
-- 1차 차분을 적용하여 추세 구성요소를 제거하여 안정화시킨다.                             
+- 1차 차분을 적용하여 추세 구성요소를 제거하여 안정화시킨다.                            
 ![photo 185](/assets/img/blog/img185.png)                 
 - 1차 차분 적용 이후, 시각화 결과 추세 구성요소가 안정화되어 정상성을 만족함을 알 수 있다.
 - 1차 차분 적용 이후 ADF test 결과 -> ADF Statistic: -5.268, p-value: 0.000
@@ -135,13 +135,77 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 - 역변환 이후 MAE 결과 3.45로 한 주의 유동인구에 대한 예측이 실제값보다 평균적으로 3.45명 정도 높거나 낮게 차이를 보인다.
 
 ## 5. Modeling a ARMA Process
+### ５.1 Define a ARMA Process
+- AutoRegressive Moving Average(ARMA) Model
+  - ARMA는 ACF 및 PACF 도식에서 차수를 추정할 수 없을 때 사용하는 시계열 기법
+  - 즉, ACF, PACF 도식 모두 천천히 감소하는 패턴 OR 사인 곡선 패턴인 경우에 해당
+  - ACF, PACF 대신 일반적인 모델링 절차 정의 필요 -> AIC을 이용해 p,q 조합 선택 -> Q-Q plot, 잔차 분석 진행
+  - ARMA는 AR과 MA의 조합이다. 즉 AR과 동일하게 현재값은 이전값과 상수에 선형적으로 의존하고 MA와 동일하게 수열의 평균, 현재 오차, 과거 오차에 선형적으로 의존한다.
+  - ARMA(p,q)로 표시하며 p는 AR의 차수, q는 MA의 차수를 의미한다.
+  - 선형방정식 수식: $y_t = C + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}$
+  - $C$: 상수, $y_{t-p}$: 수열의 과거값, $\mu$: 수열의 평균, $\epsilon_{t-q}$: 과거 오차항, $\epsilon_t$: 현재 오차항
+  - 차수 p는 ARMA 수식에 포함할 과거값의 개수를 결정, 프로세스 중 AR 부분에만 영향을 미친다.
+  - 차수 q는 ARMA 수식에 포함할 과거 오차항의 개수를 결정, 프로세스 중 MA 부분에만 영향을 미친다.
+  
+- ARMA (p,q) 식별 단계
+  1. 데이터 수집
+  2. 정상성 test
+    2-1 : 정상성 X -> 변환 적용 ex) 차분
+    2-2 : 정상성 O -> 다음 단계
+  3. ACF 도식화 -> 자기상관계수 식별
+    3-1 : 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
+    3-2 : 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
+    3-3 : 자기상관계수 존재 시 ->  PACF 도식화
+  5. PACF 도식화 -> 편자기상관계수 식별
+    4-1 : 지연 P 이후 갑자기 계수들이 유의하지 않다면 -> AR(p) Process
+    4-2 : 편자기상관계수 존재 시 -> ARMA Process 가능성
+  6. p,q 조합 만들기
+  7. 모든 ARMA(p,q) 조합 피팅
+  8. AIC가 가장 낮은 모델 선택
+    * AIC: Akaike information criterion, 모델의 품질을 다른 모델들과 비교하여 상대적으로 정량화, 모델에 의해 손실되는 정보의 양을 상대적으로 정량화
+    * 손실되는 정보가 적을수록 AIC 값은 낮고 모델이 더 우수하다고 판정
+    * AIC 기준으로 모델을 선택하면 모델의 복ㅈ바성과 데이터에 대한 적합도 사이에서 균형 유지 가능
+    * AIC 수식: $\mathrm{AIC} = 2k - 2\ln \hat{\mathcal{L}}$
+    * $k$: 매개변수 개수, $\hat{\mathcal{L}}$: 최대우도함수값
+    * 차수가 증가하면 매개변수 k도 증가하므로 AIC가 증가한다. 즉 복잡한 모델은 AIC 기준으로 좋지 않다.
+    * 최대우도함수는 Goodness of Fit(적합도)을 측정한다. 관측된 데이터 집합에서 모델의 여러가지 매개변수가 관측된 데이터를 생성할 가능성을 추정한다. 따라서 모델이 데이터에 잘 맞는다면 최대우도함수의 최대값은 클 것이다. 즉, $\hat{\mathcal{L}}$ 값이 클수록 AIC는 낮아진다.
+    * Overfitting 모델은 적합도($\hat{\mathcal{L}}$)가 높기 때문에 AIC는 감소할 수 있지만, 복잡도(k)가 높아 AIC에 좋지 않을 수도 있다.
+    * Underfitting 모델은 적합도($\hat{\mathcal{L}}$)가 낮아 AIC 값은 크지만, 복잡도(k)가 낮아 AIC가 크지 않을 수 있다. 
+  10. 잔차 분석 : 모델의 실제값과 예측값의 차이인 모델의 잔차를 분석
+    * 이상적인 모델은 잔차가 무작위성을 보인다. = 잔차가 상관관계 없이 독립적 분포
+    9-1. Q-Q 도식이 직선을 만족해야 한다.
+    9-2. 잔차 간 상관관계가 없어야 한다. -> Ljung-Box test
+    9-3. 위의 두 가지 사항을 만족한다면 예측 진행 / 반대로 만족하지 않는다면, 다른 p와 q 조합 시도
 
+### 5.2 ARMA Process example
+- Hourly bandwidth usage of Data center Data
+  
+#### 5.2.1 정상성 test
+![photo 191](/assets/img/blog/img191.png)                               
+- 데이터 시각화 결과, 추세가 존재하므로 정상성을 만족하지 않을 가능성이 높다. 또한, 주기적 패턴이 보이지 않으므로 계절적 효과를 배제할 수 있다.
+- ADF test는 statsmodels 라이브러리의 adfuller를 활용한다.   
+- ADF test 결과 ->  ADF Statistic: -0.871, p-value: 0.797
+- ADF 통계량의 절댓값 크기가 작고 p-value가 높기 때문에 귀무가설 채택으로 현재 해당 데이터는 비정상성
 
+#### 5.2.2 변환을 통한 정상성 만족시키기
+- 1차 차분을 적용하여 추세 구성요소를 제거하여 안정화시킨다.                                  
+![photo 192](/assets/img/blog/img192.png)                     
+- 1차 차분 적용 이후, 시각화 결과 추세 구성요소가 안정화되어 정상성을 만족함을 알 수 있다.
+- 1차 차분 적용 이후 ADF test 결과 -> ADF Statistic: -20.695, p-value: 0.000
+- ADF 통계량의 절댓값 크기가 크고 p-value가 낮기 때문에, 귀무가설을 기각하여 정상성을 만족한다
 
+#### 5.2.3 자기상관함수(ACF) 도식화
+- statsmodels 라이브러리의 plot_acf를 활용한다.                             
+![photo 193](/assets/img/blog/img193.png)                            
+- 유의한 자기상관계수가 모두 존재하고, 천천히 감소함으로 ARMA Process 가능성 존재
 
+#### 5.2.4 편자기상관함수(PACF) 도식화
+- statsmodels 라이브러리의 plot_pacf를 활용한다.        
+![photo 193](/assets/img/blog/img194.png)                   
+- 유의한 계수와 유의하지 않은 계수를 명확하게 구분할 수 없는 사인 곡선의 패턴을 보이므로 ARMA Process 가능성 존재
+- ACF, PACF 도식 모두 천천히 감소하는 패턴 OR 사인 곡선 패턴이으로 ARMA Process 진행
 
-
-
+#### 5.2.5
 <br>              
 
 참고문헌: TimeSeries Forecasting In Python
