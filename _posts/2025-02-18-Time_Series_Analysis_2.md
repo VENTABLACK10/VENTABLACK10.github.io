@@ -248,6 +248,6 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 ![photo 200](/assets/img/blog/img200.png)                                 
 - 예측 결과 실제값과 거의 일치하며 성능이 매우 우수함을 알 수 있다.
 - 역변환 이후 MAE 결과 14로 14Mbps 정도 높거나 낮음을 의미한다.
-<br>              
+<br>               
 
 참고문헌: TimeSeries Forecasting In Python
