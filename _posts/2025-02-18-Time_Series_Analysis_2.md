@@ -51,7 +51,7 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 - 즉, MA 모델은 앞으로의 q 단계까지만 예측 가능하다. 그 이후의 예측에 대해서는 모델이 과거 오차항 없이 평균만으로 예측하여 평귱만 반환다.
 - q 단계 이후 단순 평균 예측을 막기 위해 롤링 예측(rolling forecast)을 사용한다.
 - 롤링 예측: 여러 단계를 예측할 때까지 반복해서 q번의 시간 단계씩 예측을 진행                  
-![photo 181](/assets/img/blog/img181.png)                    
+![photo 181](/assets/img/blog/img181.png)
 ![photo 182](/assets/img/blog/img182.png)                       
 - MSE 결과 1.95로 평균 예측 모델, 이전값 기반 예측 모델보다 성능이 좋게 나왔음을 알 수 있다.             
 
@@ -123,7 +123,7 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 
 #### 4.2.5 AR(3) Model을 이용한 예측
 - AR Model과 같이 롤링 예측을 통해 예측을 수행한다.            
-![photo 188](/assets/img/blog/img188.png)                   
+![photo 188](/assets/img/blog/img188.png)
 ![photo 189](/assets/img/blog/img189.png)           
 - MSE 결과 0.92로 평균 예측 모델, 이전값 기반 예측 모델보다 성능이 좋게 나왔음을 알 수 있다.       
 
@@ -156,12 +156,11 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
     3-1 : 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
     3-2 : 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
     3-3 : 자기상관계수 존재 시 ->  PACF 도식화
-  5. PACF 도식화 -> 편자기상관계수 식별
+  4. PACF 도식화 -> 편자기상관계수 식별
     4-1 : 지연 P 이후 갑자기 계수들이 유의하지 않다면 -> AR(p) Process
     4-2 : 편자기상관계수 존재 시 -> ARMA Process 가능성
-  6. p,q 조합 만들기
-  7. 모든 ARMA(p,q) 조합 피팅
-  8. AIC가 가장 낮은 모델 선택
+  5. p,q 조합 만들기 및 모든 ARMA(p,q) 조합 피팅
+  6. AIC가 가장 낮은 모델 선택
     * AIC: Akaike information criterion, 모델의 품질을 다른 모델들과 비교하여 상대적으로 정량화, 모델에 의해 손실되는 정보의 양을 상대적으로 정량화
     * 손실되는 정보가 적을수록 AIC 값은 낮고 모델이 더 우수하다고 판정
     * AIC 기준으로 모델을 선택하면 모델의 복ㅈ바성과 데이터에 대한 적합도 사이에서 균형 유지 가능
@@ -171,11 +170,11 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
     * 최대우도함수는 Goodness of Fit(적합도)을 측정한다. 관측된 데이터 집합에서 모델의 여러가지 매개변수가 관측된 데이터를 생성할 가능성을 추정한다. 따라서 모델이 데이터에 잘 맞는다면 최대우도함수의 최대값은 클 것이다. 즉, $\hat{\mathcal{L}}$ 값이 클수록 AIC는 낮아진다.
     * Overfitting 모델은 적합도($\hat{\mathcal{L}}$)가 높기 때문에 AIC는 감소할 수 있지만, 복잡도(k)가 높아 AIC에 좋지 않을 수도 있다.
     * Underfitting 모델은 적합도($\hat{\mathcal{L}}$)가 낮아 AIC 값은 크지만, 복잡도(k)가 낮아 AIC가 크지 않을 수 있다. 
-  10. 잔차 분석 : 모델의 실제값과 예측값의 차이인 모델의 잔차를 분석
+  7. 잔차 분석 : 모델의 실제값과 예측값의 차이인 모델의 잔차를 분석
     * 이상적인 모델은 잔차가 무작위성을 보인다. = 잔차가 상관관계 없이 독립적 분포
-    9-1. Q-Q 도식이 직선을 만족해야 한다.
-    9-2. 잔차 간 상관관계가 없어야 한다. -> Ljung-Box test
-    9-3. 위의 두 가지 사항을 만족한다면 예측 진행 / 반대로 만족하지 않는다면, 다른 p와 q 조합 시도
+    7-1. Q-Q 도식이 직선을 만족해야 한다.
+    7-2. 잔차 간 상관관계가 없어야 한다. -> Ljung-Box test
+    7-3. 위의 두 가지 사항을 만족한다면 예측 진행 / 반대로 만족하지 않는다면, 다른 p와 q 조합 시도
 
 ### 5.2 ARMA Process example
 - Hourly bandwidth usage of Data center Data
@@ -201,11 +200,54 @@ title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 
 #### 5.2.4 편자기상관함수(PACF) 도식화
 - statsmodels 라이브러리의 plot_pacf를 활용한다.        
-![photo 193](/assets/img/blog/img194.png)                   
+![photo 194](/assets/img/blog/img194.png)                   
 - 유의한 계수와 유의하지 않은 계수를 명확하게 구분할 수 없는 사인 곡선의 패턴을 보이므로 ARMA Process 가능성 존재
 - ACF, PACF 도식 모두 천천히 감소하는 패턴 OR 사인 곡선 패턴이으로 ARMA Process 진행
 
-#### 5.2.5
+#### 5.2.5 p,q 조합 리스트 생성 및 ARMA(p,q) 조합 피팅 -> AIC가 가장 낮은 모델 선택
+- itertools의 product 함수를 사용하여 (p,q)에 가능한 모든 조합 목록을 생성한다.
+- ARMA(p,q) 모델들을 피팅하기 위한 함수를 정의한 뒤, 각 조합에 대한 모델을 데이터에 피팅한다.
+- 이후, AIC 계산을 하고 이를 DataFrame으로 생성한다.(오름차순 정렬)            
+![photo 195](/assets/img/blog/img195.png)                  
+- AIC가 가장 낮은 모델이 ARMA(3,2)임을 알 수 있다. 하지만, 모델의 복잡도를 낮추기 위해 ARMA(2,2) 사용하는 것이 좋다. (상위 3개 조합 AIC 성능이 유사하므로)
+- AIC는 모델의 상대적인 품질을 측정하는 척도이므로 절대적인 측정을 위해 잔차 분석을 추가로 진행한다.
+
+#### 5.2.6 잔차 분석
+- 잔차: 모델에서 나온 값과 시뮬레이션된 프로세스의 실젯값 사이의 차이
+  - 완벽한 모델의 잔차는 백색소음과 같다. 즉 모델이 모든 예측 정보를 포착하여 모델링할 수 없는 무작위한 변동만 남았음을 의미 -> 잔차들이 상관관계 없이 정규분포를 가진다면, 좋은 예측 결과를 보일 모델이다.
+- 질적 분석: Q-Q 도식 -> 모델의 잔차가 정규분포라는 가설을 검증하기 위한 시각적 도구
+  - (정규)분포의 사분위수를 x축에 두고 잔차의 사분위수를 y축에 그려 산점도를 생성한다.
+  - 두 분포가 유사하여 잔차의 분포가 정규분포에 가깝다면 Q-Q 도식은 $y=x$와 거의 동일한 직선을 나타낸다. = good fitting         
+  ![photo 196](/assets/img/blog/img196.png)                  
+  - 잔차가 정규분포에 가까운 Q-Q 도식은 위와 같은 $y=x$ 직선을 생성한다.
+  - 만약, $y=x$ 직선을 벗어난 곡선이 생성된다면 이는 모델이 데이터에 적합하지 않다는 의미다. -> 이때는 다른 범위의 p,q 조합을 다시 시도한다.
+- 양적 분석(Ljung-Box test): 잔차 간 상관관계 유무 확인
+  - Ljung-Box test: 데이터 집단의 자기상관관계가 0과 유의하게 다른지 테스트하는 통계 검사
+    - statsmodels의 acorr_ljungbox 함수 사용
+  - 귀무가설 $H_0$: 데이터가 독립적으로 분포한다 = 자기상관관계가 없다.
+  - p-value가 0.05 이상이면 귀무가설을 채택하므로 해당 모델을 사용할 수 있다.
+  - 반대로, p-value가 0.05 미만이면 귀무가설을 기각하므로 해당 모델을 사용할 수 없다.
+    => Ljung-Box test p-value 모두 0.05 초과 -> 귀무가설 채택 -> Good Model
+- statsmodels을 사용하면 잔차에 대한 정성적 분석을 더 쉽게 할 수 있다.(plot_diagnostics)                 
+![photo 197](/assets/img/blog/img197.png)                     
+- 좌상단: 전체 데이터 집합의 잔차 -> 현재 추세 x, 평균 안정적 -> 정상성 만족
+- 우상단: 잔차의 히스토그램 -> 잔차가 정규분포를 나타내므로 백색소음에 가까움을 의미
+- 좌하단: 잔차의 Q-Q 도식 -> 잔차가 정규분포를 나타내므로 백색소음에 가까움을 의미
+- 우상단: 잔차의 ACF 도식 -> 지연 0에서만 유의한 피크 존재, 그 외에는 유의한 계수 없음
+=> 최종적으로 잔차가 백색소음과 유사함.
+
+#### 5.2.7 ARMA(2,2)을 사용한 예측
+- ARMA(2,2)는 MA(2)를 포함하므로 window를 2로 설정한다.                 
+![photo 198](/assets/img/blog/img198.png)
+![photo 199](/assets/img/blog/img199.png)                      
+- MSE 결과 1.77로 평균 예측 모델, 이전값 기반 예측 모델보다 성능이 좋게 나왔음을 알 수 있다.
+
+#### 5.2.8 최종 결과 해석 
+- 위에서 차분된 데이터 집합으로 예측을 수행했기 때문에 역변환을 통해 원래 규모로 되돌려야 한다.
+- 역변환을 통해 원래 규모의 예측값을 얻을 수 있다.                             
+![photo 200](/assets/img/blog/img200.png)                                 
+- 예측 결과 실제값과 거의 일치하며 성능이 매우 우수함을 알 수 있다.
+- 역변환 이후 MAE 결과 14로 14Mbps 정도 높거나 낮음을 의미한다.
 <br>              
 
 참고문헌: TimeSeries Forecasting In Python
