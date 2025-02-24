@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Time Series Analysis (2): MA, AR, ARMA, ARIMA, SARIMA, SARIMAX, VAR"
+title:  "Time Series Analysis (2): MA, AR"
 ---
 
 ## 3. Modeling a Moving Average (MA) Process
