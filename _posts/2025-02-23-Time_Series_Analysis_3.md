@@ -281,7 +281,7 @@ title:  "Time Series Analysis (3): ARMA, ARIMA, SARIMA, SARIMAX, VAR"
 #### 7.2.5 $SARIMA(2,1,1)(1,1,2)_12$을 사용한 예측 및 결과 해석         
 ![photo 211](/assets/img/blog/img211.png)
 ![photo 212](/assets/img/blog/img212.png)                                        
-- MAPE(평균절대백분율오차) 결과 2.85로 단순 계절성 모델, 계절성을 고려하지 않은 ARIMA 모델보다 성능이 우수함을 알 수 있다.
+- MAPE(평균절대백분율오차) 결과 2.85로 단순 계절성 모델, 계절성을 고려하지 않은 ARIMA 모델보다 성능이 우수함을 알 수 있다.   
 
 <br>          
 
