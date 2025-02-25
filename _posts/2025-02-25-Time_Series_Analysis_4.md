@@ -134,9 +134,9 @@ title:  "Time Series Analysis (4): SARIMA, SARIMAX, ARIMAX, VAR"
   5. p,q,P,Q 조합 만들기 및 모든 $SARIMAX(p,d,q)(P,D,Q)_m$ 조합 피팅
   6. AIC가 가장 낮은 모델 선택
   7. 잔차 분석 : 모델의 실제값과 예측값의 차이인 모델의 잔차를 분석
-    6-1. Q-Q 도식이 직선을 만족해야 한다.
-    6-2. 잔차 간 상관관계가 없어야 한다. -> Ljung-Box test
-    6-3. 위의 두 가지 사항을 만족한다면 예측 진행 / 반대로 만족하지 않는다면, 다른 p와 q 조합 시도
+    - Q-Q 도식이 직선을 만족해야 한다.
+    - 잔차 간 상관관계가 없어야 한다. -> Ljung-Box test
+    - 위의 두 가지 사항을 만족한다면 예측 진행 / 반대로 만족하지 않는다면, 다른 p와 q 조합 시도
 
 ### 8.2 SARIMAX Process example
 - Macro economic Data, USA GDP Prediction
