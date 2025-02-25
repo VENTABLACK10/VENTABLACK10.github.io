@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Time Series Analysis (3): ARMA, ARIMA, SARIMA, SARIMAX, VAR"
+title:  "Time Series Analysis (3): ARMA, ARIMA"
 ---
 
 ## 5. Modeling a ARMA Process
