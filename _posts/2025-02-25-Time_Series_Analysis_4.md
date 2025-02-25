@@ -1,9 +1,14 @@
-2025-02-25-Time_Series_Analysis_4.md
-
 ---
 layout: single
 title:  "Time Series Analysis (4): SARIMA, SARIMAX, VAR"
 ---
+
+## 5. Modeling a ARMA Process
+### ５.1 Define a ARMA Process
+- AutoRegressive Moving Average(ARMA) Model
+  - ARMA는 ACF 및 PACF 도식에서 차수를 추정할 수 없을 때 사용하는 시계열 기법
+  - 즉, ACF, PACF 도식 모두 천천히 감소하는 패턴 OR 사인 곡선 패턴인 경우에 해당
+  - ACF, PACF 대신 일반적인 모델링 절차 정의 필요 -> 
 
 ## 7. Modeling a SARIMA Process
 ### 7.1 Define a SARIMA Process
