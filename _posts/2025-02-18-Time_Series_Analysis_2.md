@@ -18,11 +18,11 @@ title:  "Time Series Analysis (2): MA, AR"
 - Moving Average Process에서 q(차수) 식별 단계
   1. 데이터 수집
   2. 정상성 test
-    2-1 : 정상성 X -> 변환 적용 ex) 차분
-    2-2 : 정상성 O -> 다음 단계
+    - 정상성 X -> 변환 적용 ex) 차분
+    - 정상성 O -> 다음 단계
   3. ACF 도식화 -> 자기상관계수 식별
-    3-1 : 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
-    3-2 : 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
+    - 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
+    - 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
 
 ### 3.2 Moving Average(MA) Process example
 - Widget sales of xyz widget company Data
@@ -76,14 +76,14 @@ title:  "Time Series Analysis (2): MA, AR"
 - AutoRegressive Process에서 P 식별 단계
   1. 데이터 수집
   2. 정상성 test
-    2-1 : 정상성 X -> 변환 적용 ex) 차분
-    2-2 : 정상성 O -> 다음 단계
+    - 정상성 X -> 변환 적용 ex) 차분
+    - 정상성 O -> 다음 단계
   3. ACF 도식화 -> 자기상관계수 식별
-    3-1 : 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
-    3-2 : 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
-    3-3 : 자기상관계수 존재 시 ->  PACF 도식화
+    - 지연 0 이후 유의한 계수를 찾을 수 없으면 -> 확률 보행
+    - 지연 q 이후 갑자기 계수들이 유의하지 않는다면 -> MA(q) process
+    - 자기상관계수 존재 시 ->  PACF 도식화
   4. PACF 도식화 -> 편자기상관계수 식별
-    4-1 : 지연 P 이후 갑자기 계수들이 유의하지 않다면 -> AR(p) Process
+    - 지연 P 이후 갑자기 계수들이 유의하지 않다면 -> AR(p) Process
 
 ### 4.2 Moving Average(MA) Process example
 - Average weekly foot traffic of Retail store Data
