@@ -187,7 +187,7 @@ title:  "Time Series Analysis (4): SARIMAX, ARIMAX, VAR"
 ![photo 224](/assets/img/blog/img224.png)                                          
 - MAPE(평균절대백분율오차) 결과 realdpi는 3.14로 단순 마지막 측정값으로 예측하는 모델(2.26)보다 성능이 약간 떨어지고 realcons는 1.77로 단순 마지막 측정값으로 예측하는 모델(2.46)보다 성능이 우수함을 알 수 있다.
 - 두 가지 모두에서 모델이 베이스라인이 모델보다 낫지 않기 때문에 명확한 결론을 내릴 수 없다.
-- 따라서 realdpi를 예측하기 위해서는 SARIMAX 모델을 사용해야 한다. 즉, VAR(3) 모델만으로는 realdpi와 realcons를 정확하게 예측하기에 충분하지 않다는 것을 알 수 있다.
+- 따라서 realdpi를 예측하기 위해서는 SARIMAX 모델을 사용해야 한다. 즉, VAR(3) 모델만으로는 realdpi와 realcons를 정확하게 예측하기에 충분하지 않다는 것을 알 수 있다.  
 
 <br>            
 
