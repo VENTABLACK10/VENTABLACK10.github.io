@@ -106,7 +106,16 @@ title:  "Time Series Analysis (4): SARIMAX, ARIMAX, VAR"
   - Granger Causality Test를 통과해야 VAR 모델을 적용해 예측을 할 수 있다.
   - VAR(p) 모델의 일반 수식은 상수 벡터, 두 시계열의 과거값, 오차 항 벡터로 이루어진 선형 조합이다.
   - 수식: $\mathbf{y}_t = \mathbf{c} + \mathbf{\Phi}_1 \mathbf{y}_{t-1} + \mathbf{\Phi}_2 \mathbf{y}_{t-2} + \dots + \mathbf{\Phi}_p \mathbf{y}_{t-p} + \mathbf{\epsilon}_t$
-  - 행렬 표현: $\mathbf{y}_t = \mathbf{c} + \mathbf{\Phi}_1 \mathbf{y}_{t-1} + \mathbf{\Phi}_2 \mathbf{y}_{t-2} + \dots + \mathbf{\Phi}_p \mathbf{y}_{t-p} + \mathbf{\epsilon}_t$
+  - 행렬 표현: $\begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix}
+=
+\begin{bmatrix} c_1 \\ c_2 \end{bmatrix}
++
+\sum_{i=1}^{p} 
+\begin{bmatrix} \phi_{11}^{(i)} & \phi_{12}^{(i)} \\ \phi_{21}^{(i)} & \phi_{22}^{(i)} \end{bmatrix}
+\begin{bmatrix} y_{1,t-i} \\ y_{2,t-i} \end{bmatrix}
++
+\begin{bmatrix} \epsilon_{1t} \\ \epsilon_{2t} \end{bmatrix}$
+
   - $C$: 상수, $\epsilon_t$: 백색소음인 현재 오차항, $y_t-p$: 시계열의 과거값, $\Phi_p$: 모델 계수
 
 #### $VAR(p)$ 식별 단계 
