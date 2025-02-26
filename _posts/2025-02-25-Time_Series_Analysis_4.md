@@ -105,8 +105,7 @@ title:  "Time Series Analysis (4): SARIMAX, ARIMAX, VAR"
   - VAR(p) 모델은 두 수열이 서로를 예측하는 데 유용한 경우에만 유효하다.
   - Granger Causality Test를 통과해야 VAR 모델을 적용해 예측을 할 수 있다.
   - VAR(p) 모델의 일반 수식은 상수 벡터, 두 시계열의 과거값, 오차 항 벡터로 이루어진 선형 조합이다.
-  - 수식: $y_t = C + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t$
-  - 행렬 표현: $ \mathbf{Y}_t = \mathbf{C} + \mathbf{\Phi}_1 \mathbf{Y}_{t-1} + \mathbf{\Phi}_2 \mathbf{Y}_{t-2} + \dots + \mathbf{\Phi}_p \mathbf{Y}_{t-p} + \mathbf{\epsilon}_t $
+  - 수식: $Y_t = C + \Phi_1 Y_{t-1} + \Phi_2 Y_{t-2} + \dots + \Phi_p Y_{t-p} + \epsilon_t$
   - $C$: 상수, $\epsilon_t$: 백색소음인 현재 오차항, $y_t-p$: 시계열의 과거값, $\Phi_p$: 모델 계수
 
 #### $VAR(p)$ 식별 단계 
