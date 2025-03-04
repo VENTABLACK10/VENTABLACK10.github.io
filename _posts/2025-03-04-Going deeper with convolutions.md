@@ -101,13 +101,108 @@ title:  "[Paper Reiview] Going deeper with convolutions"
   - 단, 추론 시 제거
 
 ### 6. Training Methodology
-
+- 훈련과정에서 0.9 SGD 모멘텀 값을 사용
+- 학습률을 8 epoch마다 4%씩 감소시키는 스케쥴러 적용
+- 최종 추론 시 사용된 모델은 Polyak 평균화 기법을 활용하여 생성
+- 이미지의 다양한 크기의 패치를 샘플링하는 방식이 효과적임을 발견 -> 이때 패치 크기는 전체 이미지 면적의 8%에서 100% 사이에서 균등하게 분포하며 종횡비는 3:4 ~ 4:3 사이에서 무작위로 선택
+- 또한, Andrew Howard가 제안한 광학 왜곡이 어느 정도 과적합을 방지하는 데 유용하다는 것을 발견
 
 ### 7. ILSVRC 2014 Classification Challenge Setup and Results
+- LSVRC 2014 Classification Challenge 목표: 이미지를 1,000개의 카테고리 중 하나로 분류
+- 데이터셋 구성: training set 1,200,000개 / validation set 50,000개 / test set 100,000 개
+- 성능 측정 지표
+  - TOP-1 Accuracy: 모델이 예측한 가장 확률이 높은 클래스(1순위)가 정답과 일치하는 비율
+  - Top-5 Error rate: 모델이 예측한 상위 5개 클래스 내에 정답이 포함되지 않는 경우의 비율 (순위를 결정하는 기준)
+ 
+<br>            
 
+- 접근 방식                  
+![photo 228](/assets/img/blog/img228.png)                           
+  1. GoogleNet 모델에 앙상블 적용
+    - 동일한 GoogleNet 모델 7개를 독립적으로 훈련, 그 중 한가지는 더 넓은 버전으로 훈련
+    - 모든 모델이 같은 초기화 값과 학습률을 사용했지만, 샘플링 방식 및 데이터 입력 순서를 다르게 사용
+    - 테스트 시 앙상블 기법을 사용하여 성능을 향상
+  2. 보다 공격적인 Cropping 기법 사용
+    - 기존 cropping 방법(AlexNet 방식)보다 더 다양한 이미지 크기 활용
+    - 4가지 크기의 이미지 resize => 높이 or 너비를 256, 288, 320, 352로 설정
+    - 각 크기에서 3개의 위치 선택
+      - 가로 이미지는 왼쪽, 중앙, 오른쪽
+      - 세로 이미지는 위쪽, 중앙, 아래쪽)
+    - 각 위치에서 다양한 crop 수행
+      - 네 개 모서리 및 중앙 224 x 224 crop
+      - 224 x 224로 resize한 이미지를 포함
+      - 좌우 반전 적용
+      - 총 144(4x3x6x2=144)개의 crop을 생성하여 테스트 수행
+  3. Softmax 확률 정규화
+    - 다수의 crop을 통해 얻은 softmax 확률 값을 평균하여 최종 예측 수행
+    - 추가적인 대안 방법 실험
+      - crop별 max pooling -> 성능 저하
+      - 앙상블 모델 평균화만 수행 -> 성능 저하
+    - 결과적으로, simple averaging이 가장 좋은 성능을 보임
+
+<br>            
+
+- 최종 성능 및 비교 분석
+  - validation 및 test set에서 Top-5 errir rate 6.67% 달성 (대회 1위 기록)
+  - 2012년 SuperVision(AlexNet, Top-5 오류율 16.4%) 대비 56.5% 상대적 감소
+  - 2013년 Clarifai(Top-5 오류율 11.2%) 대비 약 40% 상대적 감소
+  - SuperVision 및 Clarifai는 외부 데이터를 활용했지만, 해당 모델은 X
+ - 결론
+  - ILSVRC 2014에서 GoogLeNet을 활용한 모델 앙상블과 고급 크롭핑 기법을 통해 최고 성능(Top-5 오류율 6.67%)을 달성
+  - 기존 방식보다 더 많은 crop을 사용하고, softmax averaging를 활용하는 것이 효과적임을 증명
+  - 외부 데이터를 사용하지 않고도 기존 모델보다 성능을 크게 향상
+
+<br>           
+
+- 추가 실험 및 모델 평가
+  - 모델 개수 및 crop 개수 변화에 따른 성능 분석 수행
+  - 하나의 모델을 사용할 때는 validation set에서 Top-1 error rate가 가장 낮은 모델 선택
+  - 과적합을 방지하기 위해 validation set 성능을 측정하여 모델 성능 평가
 
 ### 8. ILSVRC 2014 Detection Challenge Setup and Results
+- ILSVRC 2014 Detection Challenge 목표: 이미지에서 200개 클래스 중 하나에 속하는 객체의 Bounding Box 검출
+- 검출 기준
+  - 예측된 객체가 정답 클래스와 일치해야 한다.
+  - 예측된 바운딩 박스가 IoU ≥ 50% 기준을 충족해야 한다.
+  - 불필요하거나 잘못된 객체 검출은 False Positive(위양성)로 간주하여 패널티를 받는다.
+- Classification Challenge와 차이점
+  - 이미지 내에 객체가 여러 개 포함 가능하다.
+  - 일부 이미지에는 객체가 없을 수도 있다.
+  - 객체 크기가 매우 작거나 클 수 있다.
+- 평가 지표: mAP(평균 정밀도)를 사용하여 성능을 평가한다.
 
+<br>        
+
+- 접근 방식: 기존의 R-CNN 방식을 기반으로 하여 개선
+  1. GoogLeNet을 객체 검출에 활용
+    - R-CNN 방식과 유사하게, 지역(region) 기반 검출을 수행한다.
+    - Inception 모듈을 사용한 GoogLeNet을 영역 분류기(region classifier)로 적용한다.
+  2. 영역 제안(Region Proposal) 방식을 개선
+    - 기존 R-CNN의 Selective Search 방식을 유지하면서, MultiBox 기법을 추가 적용 -> 객체를 올바르게 감지할 확률(recall) 증가
+    - Selective Search의 superpixel 크기를 2배로 증가시켜 False Positive를 줄여 제안된 Bounding box 개수를 줄였다.
+    - MultiBox에서 추가적인 200개 영역을 제안하여 전체적으로 R-CNN보다 60% 적은 영역 제안을 사용하면서 coverage(객체 검출율)는 92% → 93%로 증가했다.
+    - 결과적으로, 단일 모델 기준 mAP가 1% 향상
+  3. ConvNet 앙상블 적용
+    - 하나의 모델만 사용하는 대신, 6개의 ConvNet을 앙상블하여 각 객체의 영역을 분류한다.
+    - 앙상블 적용 전 성능: 40% mAP -> 앙상블 적용 후 성능: 43.9% mAP => 향상
+  4. Bounding Box Regression 적용 X
+    - R-CNN과 다르게 Bounding Box의 위치를 더 정확히 보정하는 Bounding Box Regression 기법을 적용하지 않았다.(시간 부족)
+
+<br>           
+
+![photo 229](/assets/img/blog/img229.png)                     
+- 최종 성능 분석
+  - 2013년 대비 정확도 2배 증가
+  - 상위권 팀들은 모두 CNN 기반 방법 사용
+  - 대회 성적은 Table 4 참고
+  - GoogLeNet 팀은 Localization 데이터로 사전 훈련하지 않음
+- 단일 모델 성능 비교(Table 5 참고)
+  - 단일 모델 기준 최고 성능은 Deep Insight 팀이 기록 -> 그러나, Deep Insight 팀은 3개 모델을 앙상블했을 때도 성능이 0.3점만 향상
+  - 반면, GoogLeNet은 앙상블을 적용할수록 성능이 크게 향상됨
+- 결론
+  - GoogLeNet은 R-CNN을 기반으로 객체 검출에 최적화된 Inception 모델과 개선된 Region Proposal 방식을 결합하여 2014년 ILSVRC Detection 부문에서 강력한 성능을 기록
+  - 특히, Selective Search + MultiBox 결합, Superpixel 크기 증가, ConvNet 앙상블 활용을 통해 mAP를 높이는 데 성공
+  - 단일 모델과 비교했을 때 앙상블 효과가 매우 크다.
 
 ### 9. Conclusions
 - 최적의 희소 구조를 기존의 밀집된 building blocks으로 근사하는 것이 컴퓨터 비전 신경망 개선하는 데 있어 유효한 방법임을 입증
