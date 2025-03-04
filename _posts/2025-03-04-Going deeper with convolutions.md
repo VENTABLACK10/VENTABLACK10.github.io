@@ -22,7 +22,7 @@ title:  "[Paper Reiview] Going deeper with convolutions"
   2. 네트워크 깊이(depth) 자체가 증가하여 보다 복잡한 표현 학습 가능
 - ImageNet 대규모 시각 인식 챌린지(ILSVRC14)에서 classification, detection 부문에서 좋은 성능 달성 및 기여
 
-### 2. Related Work(skip)
+### 2. Related Work
 - LeNet-5와 같은 기존 CNN은 모델은 일반적으로 표준적인 구조를 가지고 있다.
   * 표준 구조: 연속적 Convolutional Layers -> 선택적 contrast Normalization & Max Pooling -> Fully-Connected Layers)
 - Max-Pooling Layer의 Spatial Information 손실 우려에도 불구하고, 컴퓨터 비전 작업에서 성공적으로 활용
@@ -30,7 +30,7 @@ title:  "[Paper Reiview] Going deeper with convolutions"
 - Network-in-Network: 1 X 1 합성곱 Layer를 추가하여 비선형성을 증가시키는 방법, 해당 계층 뒤에는 Relu 활성화 함수 적용
 - 1 X 1 합성곱 역할: 차워 축소 모듈 기능, 연산 병목 제거(네트워크 크기 제한) -> 네트워크의 깊이, 너비 확장 가능
 
-3. Motivation and High Level Considerations
+### 3. Motivation and High Level Considerations
 - Deep Neural Networks 성능을 향상시키는 직접적인 방법은 네트워크의 크기를 증가시키는 것이다.
   1. 깊이(depth) 증가 -> 네트워크의 층(layers) 수 늘리기
   2. 너비(width) 증가 -> 각 층에서의 유닛(units) 수 늘리기
