@@ -51,8 +51,8 @@ title:  "[Paper Reiview] Going deeper with convolutions"
 - 입력에 가까운 하위 계층에서는 상관 관계가 높은 유닛들이 특정 local region에 집중되므로 다음 계층에서 1x1 합성곱을 적용하여 효과적으로 처리하도록 한다.
 - 하지만, 일부 유닛들은 공간적으로 더 넓게 분포하려는 경향이 있어 더 큰 영역을 커버하는 합성고비 필요하다. 이에 크기가 더 큰 패치에 대한 합성곱이 적용되고 패치의 크기가 커질수록 적용되는 패치의 개수는 점점 줄어든다.
 - 패치 정렬 문제를 피하기 위해, Inception 아키텍쳐는 1x1, 3x3, 5x5 크기만의 필터만을 사용하고 있다.
-- 결과적으로 Inception 아키텍쳐는 이러한 다양한 크기의 필터를 활용한 여러 합성곱 계층을 병렬적으로 구성하고, 각 계층에서 나온 출력(filter banks)들을 하나의 출력 벡터로 병합하여 다음 단계의 입력으로 활용한다.
-[img225]
+- 결과적으로 Inception 아키텍쳐는 이러한 다양한 크기의 필터를 활용한 여러 합성곱 계층을 병렬적으로 구성하고, 각 계층에서 나온 출력(filter banks)들을 하나의 출력 벡터로 병합하여 다음 단계의 입력으로 활용한다.              
+![photo 225](/assets/img/blog/img225.png)                
 
 - 또한, 각 Inception 모듈에 poolong 연산을 병렬적으로 추가하는 것이 성능 향상에 도움이 될 것으로 제안하고 있다. (Figure 2(a))
 - Inception 모듈이 여러 층으로 쌓이면, 출력 간의 상관 통계는 변화한다. 상위 계층에서 더 추상적인 특징이 포착될수록, 특징들의 공간적 집주도는 감소할 것으로 예상되므로 상위 계층으로 갈수록 3x3, 5x5 합성곱의 비율을 증가시키는 것이 바람직하다.
@@ -66,7 +66,7 @@ title:  "[Paper Reiview] Going deeper with convolutions"
   4. 비슷한 성능을 내는 기존 CNN 모델보다 2~3배 빠른 네트워크 설계했다.
 
 ### 5. GoogleNet
-[img226]
+![photo 226](/assets/img/blog/img226.png)                 
 - 해당 논문에서는 가자 성공적인 특정 사례인 GoogleNet의 세부사항을 Table 1에서 예시로 설명하고 앙상블에 포함된 7개 모델 중 6개는 동일한 네트워크 topology를 유짛면서, 서로 다른 샘플링 방식으로 훈련된 모델을 사용했다.
 - Inception 모듈 내부를 포함한 모든 합성곱 계층은 Relu 활성화 함수를 사용한다.(차원 축소 및 projection layer 포함)
 - 해당 네트워크의 receptive field shape은 224x224 이며, 입력 데이터는 RGB 색상 패널을 사용하고 mean subtraction을 수행한다.
@@ -81,7 +81,7 @@ title:  "[Paper Reiview] Going deeper with convolutions"
 
 <br>      
 
-[img227]
+![photo 227](/assets/img/blog/img227.png)                   
 - 보조 네트워크 구조
 1. average pooling layer
   - filter size = 5x5
